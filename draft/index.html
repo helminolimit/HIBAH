@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Accidental Protector Plus Calculator</title>
+</head>
+<body>
+    <div class="container">
+        <h2>PruBSN AnugerahMax Benefits Calculator</h2>
+    
+        <!-- Normal Death Section -->
+        <div class="section">
+            <h3>Normal Death</h3>
+            <label for="normal-death">Cause of Death</label>
+            <select id="normal-death">
+                <option value="other">All causes other than accidental</option>
+                <option value="accident">Accidental causes</option>
+                <option value="overseas-accident">Accidental causes (overseas)</option>
+            </select>
+            <button onclick="calculateNormalDeath()">Calculate Compassionate Allowance</button>
+            <div class="result" id="normal-death-result">
+                Compassionate Allowance: <span id="normal-death-amount">RM0</span>
+            </div>
+        </div>
+    
+        <!-- Accidental Death Section -->
+        <div class="section">
+            <h3>Accidental Death</h3>
+            <label for="add-sum-covered">ADD Sum Covered (in RM)</label>
+            <input type="number" id="add-sum-covered" placeholder="Enter sum covered">
+            <button onclick="calculateAccidentalDeath()">Calculate Accidental Death Benefit</button>
+            <div class="result" id="accidental-death-result">
+                Accidental Death Benefit: <span id="accidental-death-amount">RM0</span>
+            </div>
+        </div>
+    
+        <!-- Accidental Disablement Section -->
+        <div class="section">
+            <h3>Accidental Disablement</h3>
+            <label for="add-disablement-sum">ADD Disablement Sum Covered (in RM)</label>
+            <input type="number" id="add-disablement-sum" placeholder="Enter sum covered">
+            <button onclick="calculateAccidentalDisablement()">Calculate Disablement Benefit</button>
+            <div class="result" id="disablement-result">
+                Disablement Benefit: <span id="disablement-amount">RM0</span>
+            </div>
+        </div>
+    
+        <!-- Sum Covered Section -->
+        <div class="section">
+            <h3>Min & Max Sum Covered</h3>
+            <label for="class-group">Select Class Group</label>
+            <select id="class-group">
+                <option value="class1-2">Class 1 & 2 (Max: RM4,000,000)</option>
+                <option value="class3-4">Class 3 & 4 (Max: RM2,000,000)</option>
+                <option value="non-income">Non-income group (1x Basic SC)</option>
+            </select>
+            <button onclick="calculateMaxSum()">Calculate Max Sum Covered</button>
+            <div class="result" id="sum-covered-result">
+                Max Sum Covered: <span id="max-sum-amount">RM0</span>
+            </div>
+        </div>
+    
+    </div>
+    <script>
+        // Function to calculate normal death allowance
+        function calculateNormalDeath() {
+            let causeOfDeath = document.getElementById('normal-death').value;
+            let amount = 0;
+    
+            if (causeOfDeath === 'other') {
+                amount = 2000; // RM2,000 for other causes
+            } else if (causeOfDeath === 'accident') {
+                amount = 4000; // RM4,000 for accidental causes
+            } else if (causeOfDeath === 'overseas-accident') {
+                amount = 6000; // RM6,000 for accidental causes overseas
+            }
+    
+            document.getElementById('normal-death-amount').innerText = 'RM' + amount;
+            document.getElementById('normal-death-result').style.display = 'block';
+        }
+    
+        // Function to calculate accidental death benefit
+        function calculateAccidentalDeath() {
+            let sumCovered = document.getElementById('add-sum-covered').value;
+            document.getElementById('accidental-death-amount').innerText = 'RM' + sumCovered;
+            document.getElementById('accidental-death-result').style.display = 'block';
+        }
+    
+        // Function to calculate accidental disablement benefit
+        function calculateAccidentalDisablement() {
+            let disablementSum = document.getElementById('add-disablement-sum').value;
+            document.getElementById('disablement-amount').innerText = 'RM' + disablementSum;
+            document.getElementById('disablement-result').style.display = 'block';
+        }
+    
+        // Function to calculate max sum covered based on class group
+        function calculateMaxSum() {
+            let classGroup = document.getElementById('class-group').value;
+            let maxSum = 0;
+    
+            if (classGroup === 'class1-2') {
+                maxSum = 4000000; // Max RM4,000,000 for Class 1 & 2
+            } else if (classGroup === 'class3-4') {
+                maxSum = 2000000; // Max RM2,000,000 for Class 3 & 4
+            } else if (classGroup === 'non-income') {
+                maxSum = 20000; // RM20,000 for non-income group
+            }
+    
+            document.getElementById('max-sum-amount').innerText = 'RM' + maxSum;
+            document.getElementById('sum-covered-result').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
